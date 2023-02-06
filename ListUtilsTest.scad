@@ -1,5 +1,4 @@
 include <ListUtils.scad>;
-include <TestSupport.scad>;
 
 module test_drop() {
     assert(is_empty(drop([],1)), "drop from empty list is empty list");
