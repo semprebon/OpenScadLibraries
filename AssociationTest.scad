@@ -36,6 +36,12 @@ module test_returns_default_for_missing_key() {
     assert(72 == a("height", 72));
 }
 
+module test_returns_list_of_keys() {
+    a = associate(["name", "George", "age", 23, "gender", "male"]);
+    assert(["name", "age", "gender"] == a(keys=true));
+    assert([] == associate([])(keys=true));
+}
+
 module test_merge_uses_second_value_if_duplicate() {
     a = merge_associations(
         associate(["name", "George", "age", 23, "gender", "male"]),
@@ -51,3 +57,4 @@ test_returns_value_for_key();
 test_returns_undef_for_missing_key();
 test_returns_default_for_missing_key();
 test_merge_uses_second_value_if_duplicate();
+test_returns_list_of_keys();

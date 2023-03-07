@@ -20,9 +20,11 @@
 /*
     Get value from association
  */
-function get(assoc, key, default=undef) =
+function association_get(assoc, key, default=undef) =
     let (p = [ for (pair = assoc) if (pair[0] == key) pair[1] ])
     (p[0] == undef) ? default : p[0];
+
+function association_keys(assoc) = [ for (pair = assoc) pair[0] ];
 
 /*
     Create an associative array
@@ -32,10 +34,14 @@ function associate(values) =
         count = len(values)/2,
         _data = [ for (i = [0:2:len(values)-1]) [values[i], values[i+1]] ]
     )
-    function (key, default, list=false) !list ? get(_data, key, default) : values;
+    function (key, default, list=false, keys=false)
+        list ? values
+            : keys ? association_keys(_data)
+            : association_get(_data, key, default);
 
 /*
     Merge two associations, giving the second preference
+    ! TODO: remove duplicates
  */
 function merge_associations(a, b) =
     associate(concat(b(list=true),a(list=true)));

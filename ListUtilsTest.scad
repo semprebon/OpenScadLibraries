@@ -45,6 +45,12 @@ module test_index_of() {
     assert(1 == index_of([2,4,7], 4), "found returns index of first occurrence");
 }
 
+module test_in_list() {
+    assert(in_list([0], 0), "singleton list contains item");
+    assert(!in_list([], 0), "empty list does not contain item");
+    assert(!in_list([1,2], 0), "list without item does not contain item");
+}
+
 module test_find() {
     assert(undef == find([2,4,7], function (a) a>=10), "not founds returns undef");
     assert(undef == find([], function (a) a>=10), "empty list returns undef");
@@ -147,3 +153,4 @@ test_flat_map();
 test_quicksort();
 test_fill();
 test_flatten();
+test_in_list();
